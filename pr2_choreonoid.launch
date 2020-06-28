@@ -1,0 +1,25 @@
+<launch>
+  <arg name="ROBOT" default="PR2" />
+  <param name="/use_sim_time" value="true" />
+
+  <node name="choreonoid" pkg="choreonoid_rosplugin" type="run_cnoid.sh"
+        args="$(find pr2_choreonoid)/pr2.cnoid --start-simulation" />
+
+  <group ns="$(arg ROBOT)">
+    <!-- send pr2 urdf to param server -->
+    <include file="$(find pr2_description)/robots/upload_pr2.launch" />
+
+    <!-- Load and Start Default Controllers -->
+    <include file="$(find pr2_controller_configuration_gazebo)/launch/pr2_default_controllers.launch" />
+    <!-- Fake Calibration -->
+    <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+          args="pub /calibrated std_msgs/Bool true" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher"
+          type="robot_state_publisher">
+      <!--param name="tf_prefix" value="$(arg ROBOT)" /-->
+    </node>
+  </group>
+
+
+</launch>
