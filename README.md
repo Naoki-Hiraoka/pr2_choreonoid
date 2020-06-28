@@ -1,3 +1,6 @@
+https://github.com/Naoki-Hiraoka/pr2_choreonoid/tree/master/media/PR2_choreonoid.gif
+https://github.com/Naoki-Hiraoka/pr2_choreonoid/tree/master/media/PR2_choreonoid2.gif
+
 # install
 * Install dependency
 ```
